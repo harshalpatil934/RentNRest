@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Rental Agreement</title>
+  <style>
+    body {
+      font-family: "Times New Roman", serif;
+      margin: 40px;
+      line-height: 1.8;
+      color: #000;
+    }
+    h1 {
+      text-align: center;
+      text-decoration: underline;
+      font-size: 24px;
+    }
+    .section {
+      margin-top: 20px;
+    }
+    .signature {
+      margin-top: 60px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .main{
+      display:flex;
+      justify-content: space-around;
+    }
+  </style>
+</head>
+<body>
+ <div id="agreement">
+  <div class="main">
+  <div>
+  <h1>RENTAL AGREEMENT</h1>
+
+  <p>This Rental Agreement is made on <strong><%= currentdate  %></strong> between:</p>
+   <p><strong>Owner:</strong> <%= listings.owner.username %></p>
+  <p><strong>Tenant:</strong> <%=currUser.username %></p>
+  </div>
+
+  <div class="section">
+    
+
+    <h3>1. Property Details</h3>
+    <p><strong><%=listings.title%></strong></p>
+    </div>
+
+   <div class="section">
+    <h3>2. Duration & Rent</h3>
+    <p>Rental Period: <strong><%= booking.checkIn.toDateString() %></strong> to <strong><%= booking.checkOut.toDateString()%></strong></p>
+    <p>Rent Amount: ₹<strong><%=  booking.totalPrice %></strong></p>
+    <p>Security Deposit:<%= booking.totalPrice * 0.30%></p>
+  </div>
+</div>
+  <div class="section">
+    <h3>3. Terms and Conditions</h3>
+    <ul>
+      <li>The Tenant shall not sublet the premises without written permission from the Owner.</li>
+      <li>The premises shall be used for residential purposes only.</li>
+      <li>The Tenant shall maintain the property in good condition.</li>
+      <li>Either party may terminate the agreement with 30 days written notice.</li>
+      <li>Disputes shall be settled under jurisdiction of courts in [City Name].</li>
+    </ul>
+  </div>
+ 
+  <div class="section">
+    <h3>4. Jurisdiction</h3>
+    <p>This agreement is governed under Indian law xyz.</p>
+  </div>
+  <img height="150" src="/stamp.png" alt="stamp">
+ 
+ </div>
+  <div>
+  <button onclick="downloadAgreement()">Download Agreement as PDF</button>
+  </div>
+  <div>
+<a  href="/bookings/<%= currUser._id %>">show my bookings</a>
+
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+
+<script>
+  function downloadAgreement() {
+    const element = document.getElementById("agreement");
+    html2pdf().from(element).save("RentalAgreement.pdf");
+  }
+</script>
+
+
+</body>
+</html>
