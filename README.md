@@ -16,7 +16,6 @@
 - **Frontend:** html,css,bootsrap
 - **Backend:** Node.js, Express.js
 - **Database:** MongoDB
-- **Extras:** JWT Auth, Razorpay, PDF Generator, Cloudinary
 
 ## 📦 How to Run
 
